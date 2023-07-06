@@ -1,0 +1,25 @@
+```mermaid
+sequenceDiagram
+    participant Browser
+    participant Server
+
+    Browser->>Server: 1. HTTP Post https://studies.cs.helsinki.fi/exampleapp/new_note
+    Server-->>Browser: 2. HTML-koodi
+    Browser->>Server: 3. HTTP  GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate Server
+    Browser-->>Server: 5. HTML document
+    deactivate Server
+    Browser->>Server: 6. HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate Server
+    Server-->>Browser: 7. main.css
+    deactivate Server
+    Browser->>Server: 8. HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate Server
+    Server-->>Browser: 9. main.js
+    deactivate Server
+    Browser->>Server: 10. HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate Server
+    Server-->>Browser: 11. data.json
+    deactivate Server
+    
+```
