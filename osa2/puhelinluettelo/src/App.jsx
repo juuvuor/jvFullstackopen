@@ -66,7 +66,14 @@ const App = () => {
     setFilter(event.target.value)
   }
 
-  const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(filterNames.toLowerCase()))
+//kokeilu sekä väliaikainen ratkaisu
+  const filteredPersons = persons.filter(person => {
+    if (person.name !== undefined) {
+      return person.name.toLowerCase().includes(filterNames.toLowerCase())
+    }
+    return false
+  });
+  
 
   const personDelete = (id) => {
     // console.log(`nähdään id ${id} ja se voidaan nyt poistaa`)
