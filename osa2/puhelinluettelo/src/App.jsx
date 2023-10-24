@@ -54,7 +54,7 @@ const App = () => {
           }, 2000)
         }).catch(error => {
           setOperationMessage(
-            `${error.response.data}`
+            `error ${error.response.data} `
           )
           setTimeout(() => {
             setOperationMessage(null)
