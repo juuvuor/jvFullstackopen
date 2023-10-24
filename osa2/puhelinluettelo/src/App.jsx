@@ -56,7 +56,7 @@ const App = () => {
           // setOperationMessage(
           //   error.response.data
           // )
-          console.log('frontin errori; ',error.response.data)
+          console.log(`frontin errori; ${error.response.data}`)
         })
       }
   }
