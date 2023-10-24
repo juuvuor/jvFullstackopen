@@ -54,12 +54,12 @@ const App = () => {
           }, 2000)
         }).catch(error => {
           setOperationMessage(
-            `error ${error.response.data} `
+            `${error.response.data} `
           )
           setTimeout(() => {
             setOperationMessage(null)
           }, 2000)
-          // console.log(`frontin errori; ${error.response.data}`)
+           console.log(`frontin errori; ${error.response.data}`)
         })
       }
   }
