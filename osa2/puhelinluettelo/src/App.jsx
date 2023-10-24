@@ -52,7 +52,12 @@ const App = () => {
           setTimeout(() => {
             setOperationMessage(null)
           }, 2000)
-        }) 
+        }).catch(error => {
+          setOperationMessage(
+            error.response.data
+          )
+          console.log(error.response.data)
+        })
       }
   }
 
