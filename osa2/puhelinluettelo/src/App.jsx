@@ -53,10 +53,10 @@ const App = () => {
             setOperationMessage(null)
           }, 2000)
         }).catch(error => {
-          setOperationMessage(
-            error.response.data
-          )
-          console.log(error.response.data)
+          // setOperationMessage(
+          //   error.response.data
+          // )
+          console.log('frontin errori; ',error.response.data)
         })
       }
   }
