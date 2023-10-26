@@ -5,8 +5,6 @@ const app = express()
 morgan.token('body', (req) => JSON.stringify(req.body))
 const cors = require('cors')
 
-
-
 const Person = require('./models/person')
 
 const unknownEndpoint = (request, response) => {
@@ -53,8 +51,17 @@ app.post('/api/persons', (request, response, next) => {
     .catch(error => next(error))
 })
 
-app.get('/', (req, res) => {
-  res.send('<h1>Hello World!</h1>')
+
+app.get('/info', (request, response) => {
+  Person.countDocuments().then((count) => {
+    const time = new Date()
+    response.send(`
+      <div>
+        <p>Phonebook has info for ${count} people</p>
+        <p>${time}</p>
+      </div>
+    `)
+  })
 })
 
 app.get('/api/persons', (request, response) => {
@@ -75,22 +82,8 @@ app.get('/api/persons/:id', (request, response, next) => {
     .catch((error) => next(error))
 })
 
-// const countContacts = () => {
-//   const maxId = persons.length > 0 ? Math.max(...persons.map((n) => n.id)) : 0
-//   return maxId
-// }
 
-// app.get('/info', (req, res) => {
-//   //   const persons = countContacts();
-//   const time = new Date()
-//   console.log('time: ', time)
-//   res.send(`
-//         <div>
-//             <p> Phonebook has info for ${persons} people </p>
-//             <p> ${time} </p>
-//         </div>
-//         `)
-// })
+
 
 app.delete('/api/persons/:id', (request, response, next) => {
   Person.findByIdAndRemove(request.params.id)
