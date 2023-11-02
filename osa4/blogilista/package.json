@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "push:full": "git add . && git commit -m osa4 && git push"
   },
   "author": "J",
   "license": "MIT",
@@ -17,6 +19,8 @@
     "mongoose": "^8.0.0"
   },
   "devDependencies": {
+    "eslint": "^8.52.0",
+    "jest": "^29.7.0",
     "nodemon": "^3.0.1"
   }
 }
