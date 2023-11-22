@@ -1,2 +1,11 @@
 node_modules
 .env
+mongo.js
+mongo
+
+
+# ignore ALL .log files
+*.log
+
+# ignore ALL files in ANY directory named temp
+temp/
