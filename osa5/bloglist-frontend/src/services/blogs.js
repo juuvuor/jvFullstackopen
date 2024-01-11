@@ -26,6 +26,7 @@ const create = async newObject => {
     headers: { Authorization: token },
   }
 
+  console.log('cofig', config)
 
   const response = await axios.post(baseUrl, newObject, config)
   return response.data
@@ -36,5 +37,16 @@ const update = (id, newObject) => {
   return request.then(response => response.data)
 }
 
+const addLike = async (newObject, id) => {
+	const config = { headers: { Authorization: token } }
 
-export default { getAll, create, update, setToken }
+  console.log('id ', id)
+
+  console.log('käydäänkö täällä 2')
+
+	const response = await axios.put(`${baseUrl}/${id}`, newObject, config)
+	return response.data
+}
+
+
+export default { getAll, create, update, setToken, addLike }

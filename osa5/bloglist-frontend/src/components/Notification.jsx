@@ -3,7 +3,7 @@ const Notification = ({ message }) => {
       return null
     }
 
-console.log('message', message)
+// console.log('message', message)
 
     return (
       <div className="error">
