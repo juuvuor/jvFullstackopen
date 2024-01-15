@@ -1,9 +1,9 @@
 
-import React, { useState } from 'react';
-import blogService from '../services/blogs'; // replace with your actual import
+import React, { useState } from 'react'
 
 
-const Blog = ({ blog, updateLike, user }) => {
+
+const Blog = ({ blog, updateLike, removeBlog, user }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -12,17 +12,11 @@ const Blog = ({ blog, updateLike, user }) => {
     marginBottom: 5
   }
 
-  const [visible, setVisible] = useState(false);
-  const [uBlog , uptadeBlogLike] = useState()
-
-  
-  
-  
-  
+  const [visible, setVisible] = useState(false)
 
   const toggleVisibility = () => {
-    setVisible(!visible);
-  };
+    setVisible(!visible)
+  }
 
   const handleLike =  () => {
     const updatedBlog = {
@@ -31,22 +25,27 @@ const Blog = ({ blog, updateLike, user }) => {
       author: blog.author,
       likes: blog.likes + 1,
       user: blog.user.id,
-    };
+    }
 
     updateLike(updatedBlog, blog.id)
-    blog.likes = updatedBlog.likes
-    
+    blog.likes = updatedBlog.likes // mieti tätä vileä
+  }
+
+  const handleDelete = () => {
+    if (
+      window.confirm('Are you sure you want to remove this blog?') ===
+			true
+    ) {
+      removeBlog(blog.id)
+    }
+  }
 
 
-  
-  };
 
-
-  
 
 
   return (
-    
+
     <div style={blogStyle}>
       {blog.title} {blog.author}
       <button onClick={toggleVisibility}>
@@ -57,10 +56,13 @@ const Blog = ({ blog, updateLike, user }) => {
           <p>likes {blog.likes} <button onClick={handleLike}>like</button></p>
           <p>{blog.url}</p>
           <p>{blog.user.name}</p>
+          {blog.user.id === user.id && (
+            <button onClick={handleDelete}>delete</button>
+          )}
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Blog;
+export default Blog

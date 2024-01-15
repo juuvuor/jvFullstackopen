@@ -1,32 +1,32 @@
-import React from 'react';
+import React from 'react'
 import { useState } from 'react'
 
 
-const BlogForm = ({ createBlog , user}) => {
+const BlogForm = ({ createBlog , user }) => {
 
-  const [newTitle, setNewTitle] = useState('');
-  const [newAuthor, setNewAuthor] = useState('');
-  const [newUrl, setNewUrl] = useState('');
+  const [newTitle, setNewTitle] = useState('')
+  const [newAuthor, setNewAuthor] = useState('')
+  const [newUrl, setNewUrl] = useState('')
 
   const addBlog = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     createBlog ({
       user: user,
       title: newTitle,
       author: newAuthor,
       url: newUrl,
     })
-      setNewTitle('');
-      setNewAuthor('');
-      setNewUrl('');
+    setNewTitle('')
+    setNewAuthor('')
+    setNewUrl('')
 
-   
+
   }
 
   return (
     <form onSubmit={addBlog}>
       <div>
-        title: 
+        title:
         <input
           type="text"
           value={newTitle}
@@ -35,7 +35,7 @@ const BlogForm = ({ createBlog , user}) => {
         />
       </div>
       <div>
-        author: 
+        author:
         <input
           type="text"
           value={newAuthor}
@@ -44,7 +44,7 @@ const BlogForm = ({ createBlog , user}) => {
         />
       </div>
       <div>
-        url: 
+        url:
         <input
           type="text"
           value={newUrl}
@@ -53,8 +53,8 @@ const BlogForm = ({ createBlog , user}) => {
         />
       </div>
       <button type="submit">create</button>
-    </form>      
+    </form>
   )
 }
 
-export default BlogForm;
+export default BlogForm
