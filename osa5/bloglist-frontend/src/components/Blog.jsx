@@ -28,7 +28,7 @@ const Blog = ({ blog, updateLike, removeBlog, user }) => {
     }
 
     updateLike(updatedBlog, blog.id)
-    blog.likes = updatedBlog.likes // mieti tätä vileä
+    blog.likes = updatedBlog.likes 
   }
 
   const handleDelete = () => {
@@ -42,22 +42,20 @@ const Blog = ({ blog, updateLike, removeBlog, user }) => {
 
 
 
-
-
   return (
 
-    <div style={blogStyle}>
+    <div style={blogStyle} className='blog'>
       {blog.title} {blog.author}
-      <button onClick={toggleVisibility}>
+      <button id='viewBlog' onClick={toggleVisibility}  >
         {visible ? 'hide' : 'view'}
       </button>
       {visible && (
         <div>
-          <p>likes {blog.likes} <button onClick={handleLike}>like</button></p>
+          <p>likes {blog.likes} <button id='likeBlog' onClick={handleLike}>like</button></p>
           <p>{blog.url}</p>
           <p>{blog.user.name}</p>
-          {blog.user.id === user.id && (
-            <button onClick={handleDelete}>delete</button>
+          {blog.user.username === user.username && (
+            <button id='deleteBlog' onClick={handleDelete}>delete</button>
           )}
         </div>
       )}

@@ -5,94 +5,94 @@ import userEvent from '@testing-library/user-event'
 import Blog from './Blog'
 
 test('renders content', () => {
-    const blog = {
-        title: 'Component testing is done with react-testing-library',
-        author: 'Test Author',
-        url: 'http://test.com',
-        likes: 5
-    }
+  const blog = {
+    title: 'Component testing is done with react-testing-library',
+    author: 'Test Author',
+    url: 'http://test.com',
+    likes: 5
+  }
 
 
-    const component = render(
+  const component = render(
 
-        <Blog blog={blog} />
-    )
+    <Blog blog={blog} />
+  )
 
-    // component.debug()
+  // component.debug()
 
-    expect(component.container).toHaveTextContent(
-        'Component testing is done with react-testing-library'
-    )
-    expect(component.container).not.toHaveTextContent(
-        'http://test.com'
-    )
-    expect(component.container).not.toHaveTextContent(
-        '5'
-    )
+  expect(component.container).toHaveTextContent(
+    'Component testing is done with react-testing-library'
+  )
+  expect(component.container).not.toHaveTextContent(
+    'http://test.com'
+  )
+  expect(component.container).not.toHaveTextContent(
+    '5'
+  )
 })
 
 
 test('clicking view button shows more content', async () => {
-    const blog = {
-        title: 'Component testing is done with react-testing-library',
-        author: 'Test Author',
-        url: 'http://test.com',
-        likes: 5,
-        user: {
-            name: 'Test User',
-            id: '1213432'
-        }
+  const blog = {
+    title: 'Component testing is done with react-testing-library',
+    author: 'Test Author',
+    url: 'http://test.com',
+    likes: 5,
+    user: {
+      name: 'Test User',
+      id: '1213432'
     }
+  }
 
-    const user =  {
-        name: 'Test User',
-        id: '1213432'
-    }
-    
-    const mockHandler = jest.fn()
+  const user =  {
+    name: 'Test User',
+    id: '1213432'
+  }
 
-    render(
-        <Blog blog={blog} user={user} toggleVisibility={mockHandler} />
-    )
+  const mockHandler = jest.fn()
 
-    const button = screen.getByText('view')
-    await userEvent.click(button)
+  render(
+    <Blog blog={blog} user={user} toggleVisibility={mockHandler} />
+  )
 
-    expect(screen.getByText('http://test.com')).toBeInTheDocument()
-    expect(screen.getByText(/5/)).toBeInTheDocument()
-    expect(screen.getByText('Test User')).toBeInTheDocument()
+  const button = screen.getByText('view')
+  await userEvent.click(button)
+
+  expect(screen.getByText('http://test.com')).toBeInTheDocument()
+  expect(screen.getByText(/5/)).toBeInTheDocument()
+  expect(screen.getByText('Test User')).toBeInTheDocument()
 })
 
 test('cliking like button two time calls event handlet two times', async () => {
-    const blog = {
-        title: 'Component testing is done with react-testing-library',
-        author: 'Test Author',
-        url: 'http://test.com',
-        likes: 5,
-        user: {
-            name: 'Test User',
-            id: '1213432'
-        }
+  const blog = {
+    title: 'Component testing is done with react-testing-library',
+    author: 'Test Author',
+    url: 'http://test.com',
+    likes: 5,
+    user: {
+      name: 'Test User',
+      id: '1213432'
     }
+  }
 
-    const user =  {
-        name: 'Test User',
-        id: '1213432'
-    }
-    
-    const mockHandler = jest.fn()
+  const user =  {
+    name: 'Test User',
+    id: '1213432'
+  }
 
-    render(
-        <Blog blog={blog} user={user} updateLike={mockHandler}/>
-    )
+  const mockHandler = jest.fn()
 
-    const viewButton = screen.getByText('view')
-    await userEvent.click(viewButton)
+  render(
+    <Blog blog={blog} user={user} updateLike={mockHandler}/>
+  )
 
-    const button = screen.getByText('like')
-    await userEvent.click(button)
-    await userEvent.click(button)
+  const viewButton = screen.getByText('view')
+  await userEvent.click(viewButton)
 
-    expect(mockHandler).toHaveBeenCalledTimes(2)
+  const button = screen.getByText('like')
+  await userEvent.click(button)
+  await userEvent.click(button)
+
+  expect(mockHandler).toHaveBeenCalledTimes(2)
 })
 

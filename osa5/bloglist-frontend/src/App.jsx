@@ -18,6 +18,7 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState(null)
   const [blogVisible, setBlogVisible] = useState(false)
   const blogFormRef = useRef()
+  const loginFormRef = useRef()
   const [updateBlogs, setUpdateBlogs] = useState(false)
 
   useEffect(() => {
@@ -86,10 +87,24 @@ const App = () => {
 
   }
 
+  const loginForm = () => {
+    return (
+
+      <LoginForm
+        username = {username}
+        setUsername = {setUsername}
+        password = {password}
+        setPassword = {setPassword}
+        handleLogin = {handleLogin}
+      />
+
+    )
+  }
+
 
   const blogForm = () => {
     return (
-      <Togglable buttonLabel = 'new blog' ref={blogFormRef}>
+      <Togglable buttonLabel = 'new blog' ref={blogFormRef} >
         <h2>Create new</h2>
         <BlogForm
           createBlog={addBlog}
@@ -138,19 +153,14 @@ const App = () => {
   }
 
 
+
   return (
     <div>
       {user === null ?
         <div>
           <h1>log in to application</h1>
           <Notification message={errorMessage} />
-          <LoginForm
-            username = {username}
-            setUsername = {setUsername}
-            password = {password}
-            setPassword = {setPassword}
-            handleLogin = {handleLogin}
-          />
+          {loginForm()}
         </div> :
         <div>
           <h1>Blogs</h1>
@@ -159,7 +169,6 @@ const App = () => {
 
           {blogForm()}
           {blogs
-            .filter(blog => blog.user.username === user.username)
             .sort((a, b) => b.likes - a.likes)
             .map(blog => (
               <Blog
@@ -167,7 +176,7 @@ const App = () => {
                 blog={blog}
                 updateLike={updateLike}
                 removeBlog={removeBlog}
-                user={blog.user}
+                user={user}
               />)
             )
           }

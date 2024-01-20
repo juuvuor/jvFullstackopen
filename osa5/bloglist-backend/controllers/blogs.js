@@ -47,6 +47,8 @@ router.delete('/:id', userExtractor, async (request, response) => {
 
   const user = request.user
 
+  
+
   if (!user || blog.user.toString() !== user.id.toString()) {
     return response.status(401).json({ error: 'operation not permitted' })
   }
@@ -54,9 +56,12 @@ router.delete('/:id', userExtractor, async (request, response) => {
   user.blogs = user.blogs.filter(b => b.toString() !== blog.id.toString() )
 
   await user.save()
-  await blog.remove()
+  await Blog.findByIdAndRemove(request.params.id)
   
   response.status(204).end()
 })
+
+
+
 
 module.exports = router
